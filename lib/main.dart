@@ -44,6 +44,25 @@ class _MyHomePageState extends State<MyHomePage> {
           image:
               DecorationImage(image: AssetImage(assets), fit: BoxFit.cover)));
 
+  Widget _buildDecoratedImage(String title, String price, String pic) =>
+      Expanded(
+        child: Card(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(18),
+                side: BorderSide(color: Colors.black38)),
+            child: Row(children: [
+              Image.asset(pic),
+              Column(
+                children: [
+                  Text(
+                    title,
+                    style: TextStyle(fontWeight: FontWeight.w500),
+                  ),
+                  Text(price),
+                ],
+              ),
+            ])),
+      );
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
@@ -53,12 +72,13 @@ class _MyHomePageState extends State<MyHomePage> {
             height: 20,
           ),
         ),
-        body: Container(
-          height: 200,
-          child: ListView(
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              children: [
+        body: ListView(
+          children: [
+            //為了設定高度用Container包起來
+            Container(
+              height: 200,
+              //讓圖片可以往右滑動，把Row改成ListView
+              child: ListView(scrollDirection: Axis.horizontal, children: [
                 _imageContainer('assets/view.jpeg'),
                 _imageContainer('assets/view.jpeg'),
                 _imageContainer('assets/view.jpeg'),
@@ -67,6 +87,9 @@ class _MyHomePageState extends State<MyHomePage> {
                 _imageContainer('assets/view.jpeg'),
                 _imageContainer('assets/view.jpeg'),
               ]),
+            ),
+            _buildDecoratedImage('衣服標題', '價格', 'assets/clothes.jpeg')
+          ],
         ));
   }
 }
