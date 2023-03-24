@@ -63,6 +63,7 @@ class MyHomePage extends StatelessWidget {
         child: Column(
           children: [
             Text(category, style: const TextStyle(fontWeight: FontWeight.bold)),
+            //此處要加上Expanded避免畫面溢出
             Expanded(
                 child: _clothesCard(
                     'UNIQLO特級極輕羽絨外套', 'NT\$323', 'assets/clothes.jpeg')),
