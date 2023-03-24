@@ -35,28 +35,33 @@ class MyHomePage extends StatelessWidget {
       width: 350,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-          image:
-              DecorationImage(image: AssetImage(assets), fit: BoxFit.cover)));
+          image: DecorationImage(image: AssetImage(assets), fit: BoxFit.fill)));
   //衣服價目
-  Widget _clothesCard(String title, String price, String pic) => SizedBox(
+  Widget _clothesCard(String title, String price, String pic) => Container(
       height: 100,
       width: 500,
-      child: Card(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-            side: const BorderSide(color: Colors.black38)),
-        child: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
-          Image.asset(pic),
-          Column(
-            //對齊文字上下置中、左右置左
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
-              Text(price),
-            ],
+      margin: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
+      decoration: BoxDecoration(
+          border: Border.all(color: Colors.black38, width: 1),
+          borderRadius: BorderRadius.circular(8)),
+      child: Row(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(8.0),
+                bottomLeft: Radius.circular(8.0)),
+            child: Image.asset('assets/view.jpeg'),
           ),
-        ]),
+          Column(
+              //對齊文字上下置中、左右置左
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(title,
+                    style: const TextStyle(fontWeight: FontWeight.bold)),
+                Text(price)
+              ]),
+        ],
       ));
 
   Widget _clothesList(String category) => Center(
@@ -66,19 +71,19 @@ class MyHomePage extends StatelessWidget {
             //此處要加上Expanded避免畫面溢出
             Expanded(
                 child: _clothesCard(
-                    'UNIQLO特級極輕羽絨外套', 'NT\$323', 'assets/clothes.jpeg')),
+                    'UNIQLO特級極輕羽絨外套', 'NT\$323', 'assets/view.jpeg')),
             Expanded(
                 child: _clothesCard(
-                    'UNIQLO特級極輕羽絨外套', 'NT\$323', 'assets/clothes.jpeg')),
+                    'UNIQLO特級極輕羽絨外套', 'NT\$323', 'assets/view.jpeg')),
             Expanded(
                 child: _clothesCard(
-                    'UNIQLO特級極輕羽絨外套', 'NT\$323', 'assets/clothes.jpeg')),
+                    'UNIQLO特級極輕羽絨外套', 'NT\$323', 'assets/view.jpeg')),
             Expanded(
                 child: _clothesCard(
-                    'UNIQLO特級極輕羽絨外套', 'NT\$323', 'assets/clothes.jpeg')),
+                    'UNIQLO特級極輕羽絨外套', 'NT\$323', 'assets/view.jpeg')),
             Expanded(
                 child: _clothesCard(
-                    'UNIQLO特級極輕羽絨外套', 'NT\$323', 'assets/clothes.jpeg')),
+                    'UNIQLO特級極輕羽絨外套', 'NT\$323', 'assets/view.jpeg')),
           ],
         ),
       );
@@ -115,7 +120,7 @@ class MyHomePage extends StatelessWidget {
               child: GridView.count(
                 //增加部件間距
                 childAspectRatio: 0.9,
-                //參照畫面寬度顯示三個或1個列表
+                //參照畫面直橫方向顯示三個或1個列表
                 crossAxisCount: (MediaQuery.of(context).orientation ==
                         Orientation.landscape)
                     ? 3
