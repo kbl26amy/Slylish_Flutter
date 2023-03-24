@@ -1,3 +1,5 @@
+import 'dart:js';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -57,15 +59,27 @@ class MyHomePage extends StatelessWidget {
         ]),
       ));
 
-  Widget _clothesList(String category) => Column(
-        children: [
-          Text(category, style: const TextStyle(fontWeight: FontWeight.bold)),
-          _clothesCard('UNIQLO特級極輕羽絨外套', 'NT\$323', 'assets/clothes.jpeg'),
-          _clothesCard('UNIQLO特級極輕羽絨外套', 'NT\$323', 'assets/clothes.jpeg'),
-          _clothesCard('UNIQLO特級極輕羽絨外套', 'NT\$323', 'assets/clothes.jpeg'),
-          _clothesCard('UNIQLO特級極輕羽絨外套', 'NT\$323', 'assets/clothes.jpeg'),
-          _clothesCard('UNIQLO特級極輕羽絨外套', 'NT\$323', 'assets/clothes.jpeg'),
-        ],
+  Widget _clothesList(String category) => Center(
+        child: Column(
+          children: [
+            Text(category, style: const TextStyle(fontWeight: FontWeight.bold)),
+            Expanded(
+                child: _clothesCard(
+                    'UNIQLO特級極輕羽絨外套', 'NT\$323', 'assets/clothes.jpeg')),
+            Expanded(
+                child: _clothesCard(
+                    'UNIQLO特級極輕羽絨外套', 'NT\$323', 'assets/clothes.jpeg')),
+            Expanded(
+                child: _clothesCard(
+                    'UNIQLO特級極輕羽絨外套', 'NT\$323', 'assets/clothes.jpeg')),
+            Expanded(
+                child: _clothesCard(
+                    'UNIQLO特級極輕羽絨外套', 'NT\$323', 'assets/clothes.jpeg')),
+            Expanded(
+                child: _clothesCard(
+                    'UNIQLO特級極輕羽絨外套', 'NT\$323', 'assets/clothes.jpeg')),
+          ],
+        ),
       );
   @override
   Widget build(BuildContext context) {
@@ -93,7 +107,8 @@ class MyHomePage extends StatelessWidget {
                 _topBanner('assets/view.jpeg'),
               ]),
             ),
-            SizedBox(
+            Container(
+              margin: const EdgeInsets.only(bottom: 10),
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
               child: GridView.count(
