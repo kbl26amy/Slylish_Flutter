@@ -1,5 +1,3 @@
-import 'dart:js';
-
 import 'package:flutter/material.dart';
 
 void main() {
@@ -47,7 +45,7 @@ class MyHomePage extends StatelessWidget {
       child: Row(
         children: [
           ClipRRect(
-            borderRadius: BorderRadius.only(
+            borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(8.0),
                 bottomLeft: Radius.circular(8.0)),
             child: Image.asset('assets/view.jpeg'),
@@ -57,13 +55,13 @@ class MyHomePage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(title,
-                    style: const TextStyle(fontWeight: FontWeight.bold)),
-                Text(price)
+                Flexible(
+                    child: Text(title,
+                        style: const TextStyle(fontWeight: FontWeight.bold))),
+                Flexible(child: Text(price))
               ]),
         ],
       ));
-
   Widget _clothesList(String category) => Center(
         child: Column(
           children: [
