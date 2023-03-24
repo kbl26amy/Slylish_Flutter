@@ -38,7 +38,7 @@ class MyHomePage extends StatelessWidget {
   //衣服價目
   Widget _clothesCard(String title, String price, String pic) => SizedBox(
       height: 100,
-      width: 420,
+      width: 500,
       child: Card(
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8),
@@ -80,7 +80,6 @@ class MyHomePage extends StatelessWidget {
         body: ListView(
           scrollDirection: Axis.vertical,
           children: [
-            //為了設定高度用Container包起來
             SizedBox(
               height: 200,
               //讓圖片可以往右滑動，把Row改成ListView
@@ -98,6 +97,8 @@ class MyHomePage extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
               child: GridView.count(
+                //增加部件間距
+                childAspectRatio: 0.9,
                 //參照畫面寬度顯示三個或1個列表
                 crossAxisCount: (MediaQuery.of(context).orientation ==
                         Orientation.landscape)
