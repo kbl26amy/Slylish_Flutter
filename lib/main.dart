@@ -38,6 +38,8 @@ class MyHomePage extends StatelessWidget {
   Widget _clothesCard(String title, String price, String pic) =>
       //用Card跟Container寫都可以，但Card外面還再包Sizebox，Container可以直接給尺寸
       Container(
+          height: 100,
+          width: 400,
           margin: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
           //加上圓角邊框
           decoration: BoxDecoration(
@@ -67,34 +69,16 @@ class MyHomePage extends StatelessWidget {
                   ])),
             ],
           ));
-  Widget _clothesList(String category) => SingleChildScrollView(
-        child: SizedBox(
-          width: 200,
-          height: 700,
-          child: Column(
-            children: [
-              Text(category,
-                  style: const TextStyle(fontWeight: FontWeight.bold)),
-              //此處要加上Expanded避免畫面溢出
-              Expanded(
-                  child: _clothesCard(
-                      'UNIQLO特級極輕羽絨外套', 'NT\$323', 'assets/view.jpeg')),
-              Expanded(
-                  child: _clothesCard(
-                      'UNIQLO特級極輕羽絨外套', 'NT\$323', 'assets/view.jpeg')),
-              Expanded(
-                  child: _clothesCard(
-                      'UNIQLO特級極輕羽絨外套', 'NT\$323', 'assets/view.jpeg')),
-              Expanded(
-                  child: _clothesCard(
-                      'UNIQLO特級極輕羽絨外套', 'NT\$323', 'assets/view.jpeg')),
-              Expanded(
-                  child: _clothesCard(
-                      'UNIQLO特級極輕羽絨外套', 'NT\$323', 'assets/view.jpeg')),
-            ],
-          ),
-        ),
-      );
+  Widget _clothesList(String category) => Column(children: [
+        Text(category, style: const TextStyle(fontWeight: FontWeight.bold)),
+        Expanded(
+            child: ListView.builder(
+          scrollDirection: Axis.vertical,
+          itemCount: 8,
+          itemBuilder: (context, index) =>
+              _clothesCard('UNIQLO特級極輕羽絨外套', 'NT\$323', 'assets/view.jpeg'),
+        ))
+      ]);
 
   @override
   Widget build(BuildContext context) {
