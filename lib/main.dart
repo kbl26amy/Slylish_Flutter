@@ -38,7 +38,6 @@ class MyHomePage extends StatelessWidget {
   Widget _clothesCard(String title, String price, String pic) =>
       //用Card跟Container寫都可以，但Card外面還再包Sizebox，Container可以直接給尺寸
       Container(
-          height: 200,
           margin: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
           //加上圓角邊框
           decoration: BoxDecoration(
@@ -53,18 +52,19 @@ class MyHomePage extends StatelessWidget {
                     bottomLeft: Radius.circular(8.0)),
                 child: Image.asset('assets/view.jpeg'),
               ),
-              Column(
-                  //對齊文字上下置中、左右置左
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+              Flexible(
+                  child: Column(
+                      //對齊文字上下置中、左右置左
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
                     //字要貼在一起適應外部約束，不能用Expanded，得用Flexible
                     Flexible(
                         child: Text(title,
                             style:
                                 const TextStyle(fontWeight: FontWeight.bold))),
                     Flexible(child: Text(price))
-                  ]),
+                  ])),
             ],
           ));
   Widget _clothesList(String category) => SingleChildScrollView(
@@ -95,6 +95,7 @@ class MyHomePage extends StatelessWidget {
           ),
         ),
       );
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -109,39 +110,34 @@ class MyHomePage extends StatelessWidget {
         body: Stack(
           children: [
             Positioned(
-              top: 0,
-              left: 0,
-              height: 200,
-              width: MediaQuery.of(context).size.width,
-              //讓圖片可以往右滑動，把Row改成ListView
-              child: ListView(scrollDirection: Axis.horizontal, children: [
-                _topBanner('assets/view.jpeg'),
-                _topBanner('assets/view.jpeg'),
-                _topBanner('assets/view.jpeg'),
-                _topBanner('assets/view.jpeg'),
-                _topBanner('assets/view.jpeg'),
-                _topBanner('assets/view.jpeg'),
-                _topBanner('assets/view.jpeg'),
-              ]),
-            ),
+                top: 0,
+                left: 0,
+                height: 200,
+                width: MediaQuery.of(context).size.width,
+                //讓圖片可以往右滑動，把Row改成ListView
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 6,
+                    itemBuilder: (BuildContext context, int index) {
+                      return _topBanner('assets/view.jpeg');
+                    })),
             Positioned(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height - 200,
               top: 200,
               left: 0,
-              child: GridView.count(
-                //增加部件間距
-                childAspectRatio: 0.8,
-                //參照畫面直橫方向顯示三個或1個列表
-                crossAxisCount: (MediaQuery.of(context).orientation ==
-                        Orientation.landscape)
-                    ? 3
-                    : 1,
-                children: [
-                  _clothesList('女裝'),
-                  _clothesList('男裝'),
-                  _clothesList('配件')
-                ],
+              child: GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: (MediaQuery.of(context).orientation ==
+                          Orientation.landscape)
+                      ? 3
+                      : 1,
+                ),
+                itemCount: 3,
+                itemBuilder: (context, index) {
+                  var setCategory = ['女裝', '男裝', '配件'];
+                  return _clothesList(setCategory[index]);
+                },
               ),
             ),
           ],
