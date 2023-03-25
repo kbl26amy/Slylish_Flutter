@@ -38,6 +38,7 @@ class MyHomePage extends StatelessWidget {
   Widget _clothesCard(String title, String price, String pic) =>
       //用Card跟Container寫都可以，但Card外面還再包Sizebox，Container可以直接給尺寸
       Container(
+          height: 200,
           margin: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
           //加上圓角邊框
           decoration: BoxDecoration(
@@ -66,27 +67,32 @@ class MyHomePage extends StatelessWidget {
                   ]),
             ],
           ));
-  Widget _clothesList(String category) => Center(
-        child: Column(
-          children: [
-            Text(category, style: const TextStyle(fontWeight: FontWeight.bold)),
-            //此處要加上Expanded避免畫面溢出
-            Expanded(
-                child: _clothesCard(
-                    'UNIQLO特級極輕羽絨外套', 'NT\$323', 'assets/view.jpeg')),
-            Expanded(
-                child: _clothesCard(
-                    'UNIQLO特級極輕羽絨外套', 'NT\$323', 'assets/view.jpeg')),
-            Expanded(
-                child: _clothesCard(
-                    'UNIQLO特級極輕羽絨外套', 'NT\$323', 'assets/view.jpeg')),
-            Expanded(
-                child: _clothesCard(
-                    'UNIQLO特級極輕羽絨外套', 'NT\$323', 'assets/view.jpeg')),
-            Expanded(
-                child: _clothesCard(
-                    'UNIQLO特級極輕羽絨外套', 'NT\$323', 'assets/view.jpeg')),
-          ],
+  Widget _clothesList(String category) => SingleChildScrollView(
+        child: SizedBox(
+          width: 200,
+          height: 700,
+          child: Column(
+            children: [
+              Text(category,
+                  style: const TextStyle(fontWeight: FontWeight.bold)),
+              //此處要加上Expanded避免畫面溢出
+              Expanded(
+                  child: _clothesCard(
+                      'UNIQLO特級極輕羽絨外套', 'NT\$323', 'assets/view.jpeg')),
+              Expanded(
+                  child: _clothesCard(
+                      'UNIQLO特級極輕羽絨外套', 'NT\$323', 'assets/view.jpeg')),
+              Expanded(
+                  child: _clothesCard(
+                      'UNIQLO特級極輕羽絨外套', 'NT\$323', 'assets/view.jpeg')),
+              Expanded(
+                  child: _clothesCard(
+                      'UNIQLO特級極輕羽絨外套', 'NT\$323', 'assets/view.jpeg')),
+              Expanded(
+                  child: _clothesCard(
+                      'UNIQLO特級極輕羽絨外套', 'NT\$323', 'assets/view.jpeg')),
+            ],
+          ),
         ),
       );
   @override
@@ -100,11 +106,13 @@ class MyHomePage extends StatelessWidget {
             height: 20,
           ),
         ),
-        body: ListView(
-          scrollDirection: Axis.vertical,
+        body: Stack(
           children: [
-            SizedBox(
-              height: MediaQuery.of(context).size.height / 4,
+            Positioned(
+              top: 0,
+              left: 0,
+              height: 200,
+              width: MediaQuery.of(context).size.width,
               //讓圖片可以往右滑動，把Row改成ListView
               child: ListView(scrollDirection: Axis.horizontal, children: [
                 _topBanner('assets/view.jpeg'),
@@ -116,12 +124,14 @@ class MyHomePage extends StatelessWidget {
                 _topBanner('assets/view.jpeg'),
               ]),
             ),
-            SizedBox(
+            Positioned(
               width: MediaQuery.of(context).size.width,
-              height: MediaQuery.of(context).size.height,
+              height: MediaQuery.of(context).size.height - 200,
+              top: 200,
+              left: 0,
               child: GridView.count(
                 //增加部件間距
-                childAspectRatio: 0.9,
+                childAspectRatio: 0.8,
                 //參照畫面直橫方向顯示三個或1個列表
                 crossAxisCount: (MediaQuery.of(context).orientation ==
                         Orientation.landscape)
