@@ -1,5 +1,5 @@
-import 'dart:js';
 import 'package:flutter/material.dart';
+import 'clothes_item.dart';
 
 class MyHomePage extends StatelessWidget {
   const MyHomePage({super.key});
@@ -12,56 +12,17 @@ class MyHomePage extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
           image: DecorationImage(image: AssetImage(assets), fit: BoxFit.fill)));
   //衣服價目
-  Widget _clothesCard(String title, String price, String pic) =>
-      //用Card跟Container寫都可以，但Card外面還再包Sizebox，Container可以直接給尺寸
-      GestureDetector(
-          onTap: () {
-            Navigator.pushNamed(context as BuildContext, '/second');
-          },
-          child: Container(
-              height: 100,
-              width: 400,
-              margin: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
-              //加上圓角邊框
-              decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black38, width: 1),
-                  borderRadius: BorderRadius.circular(8)),
-              child: Row(
-                children: [
-                  //圖片左邊要切圓角
-                  ClipRRect(
-                    borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(8.0),
-                        bottomLeft: Radius.circular(8.0)),
-                    child: Image.asset(pic),
-                  ),
-                  Flexible(
-                      child: Column(
-                          //對齊文字上下置中、左右置左
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                        //字要貼在一起適應外部約束，不能用Expanded，得用Flexible
-                        Flexible(
-                            child: Text(title,
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold))),
-                        Flexible(child: Text(price))
-                      ])),
-                ],
-              )));
-  Widget _clothesList(String category) => Column(children: [
+
+  Widget _clothesList(String category) =>
+      Column(mainAxisSize: MainAxisSize.min, children: [
         Text(category, style: const TextStyle(fontWeight: FontWeight.bold)),
         //這邊一定要加上Expanded，不然會不知道尺寸報error
         Expanded(
             child: ListView.builder(
-          scrollDirection: Axis.vertical,
-          itemCount: 8,
-          itemBuilder: (context, index) =>
-              _clothesCard('UNIQLO特級極輕羽絨外套', 'NT\$323', 'assets/view.jpeg'),
-        ))
+                scrollDirection: Axis.vertical,
+                itemCount: 8,
+                itemBuilder: (context, index) => const Clothesitem()))
       ]);
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
