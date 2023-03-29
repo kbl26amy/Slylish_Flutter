@@ -5,6 +5,6 @@ class DetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(child: const Text('來不及做衣服細節畫面'));
+    return const Center(child: Text('來不及做衣服細節畫面'));
   }
 }
