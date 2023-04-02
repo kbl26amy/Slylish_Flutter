@@ -1,8 +1,102 @@
 import 'package:flutter/material.dart';
+import 'model/product.dart';
 import 'clothes_item.dart';
 
 class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
+  MyHomePage({super.key});
+
+  final mokdata = <StylishCategory>[
+    StylishCategory('女裝', <Product>[
+      Product(
+          111111,
+          '透肌砰砰防曬襯衫',
+          '描述',
+          '文字',
+          '洗滌',
+          '中國',
+          '注意事項',
+          '故事',
+          [Colors.red, Colors.blue, Colors.yellow],
+          ['S', 'M', 'L'],
+          ['assets/clothes.jpeg'],
+          'assets/clothes.jpeg',
+          '100')
+    ]),
+    StylishCategory('男裝', <Product>[
+      Product(
+          111111,
+          '男裝防曬襯衫1',
+          '描述',
+          '文字',
+          '洗滌',
+          '中國',
+          '注意事項',
+          '故事',
+          [Colors.red, Colors.blue, Colors.yellow],
+          ['S', 'M', 'L'],
+          ['assets/clothes.jpeg'],
+          'assets/clothes.jpeg',
+          '100'),
+      Product(
+          111111,
+          '男裝防曬襯衫2',
+          '描述',
+          '文字',
+          '洗滌',
+          '中國',
+          '注意事項',
+          '故事',
+          [Colors.red, Colors.blue, Colors.yellow],
+          ['S', 'M', 'L'],
+          ['assets/clothes.jpeg'],
+          'assets/clothes.jpeg',
+          '100')
+    ]),
+    StylishCategory('配件', <Product>[
+      Product(
+          111111,
+          '配件防曬襯衫1',
+          '描述',
+          '文字',
+          '洗滌',
+          '中國',
+          '注意事項',
+          '故事',
+          [Colors.red, Colors.blue, Colors.yellow],
+          ['S', 'M', 'L'],
+          ['assets/clothes.jpeg'],
+          'assets/clothes.jpeg',
+          '100'),
+      Product(
+          111111,
+          '配件防曬襯衫2',
+          '描述',
+          '文字',
+          '洗滌',
+          '中國',
+          '注意事項',
+          '故事',
+          [Colors.red, Colors.blue, Colors.yellow],
+          ['S', 'M', 'L'],
+          ['assets/clothes.jpeg'],
+          'assets/clothes.jpeg',
+          '100'),
+      Product(
+          111111,
+          '配件防曬襯衫3',
+          '描述',
+          '文字',
+          '洗滌',
+          '中國',
+          '注意事項',
+          '故事',
+          [Colors.red, Colors.blue, Colors.yellow],
+          ['S', 'M', 'L'],
+          ['assets/clothes.jpeg'],
+          'assets/clothes.jpeg',
+          '100')
+    ])
+  ];
 
   //第一排圓角圖片
   Widget _topBanner(String assets) => Container(
@@ -12,44 +106,44 @@ class MyHomePage extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
           image: DecorationImage(image: AssetImage(assets), fit: BoxFit.fill)));
 
-  Widget getClothesListView(bool isWideScreen) {
-    return ListView.builder(
-        shrinkWrap: !isWideScreen,
-        scrollDirection: Axis.vertical,
-        itemCount: 8,
-        physics: const ClampingScrollPhysics(),
-        itemBuilder: (BuildContext context, int position) {
-          return const Clothesitem();
-        });
-  }
-
-  //衣服價目
-  Widget _clothesList(String category, BuildContext context) {
+  Widget _clothesList(StylishCategory category, BuildContext context) {
     double screenwidth = MediaQuery.of(context).size.width;
     bool isWideScreen = screenwidth > 700;
-    Widget productList = getClothesListView(isWideScreen);
+    Widget productList = getClothesListView(isWideScreen, category);
     double wideScreenItemWidth = screenwidth / 3;
 
     return isWideScreen
         ? SizedBox(
             width: wideScreenItemWidth,
             child: Column(children: [
-              Text(category,
+              Text(category.category,
                   style: const TextStyle(fontWeight: FontWeight.bold)),
               Expanded(child: productList)
             ]))
         : Column(
             children: [
-              Text(category,
+              Text(category.category,
                   style: const TextStyle(fontWeight: FontWeight.bold)),
               productList
             ],
           );
   }
 
+  Widget getClothesListView(bool isWideScreen, StylishCategory category) {
+    return ListView.builder(
+        shrinkWrap: !isWideScreen,
+        scrollDirection: Axis.vertical,
+        itemCount: category.productList.length,
+        physics: const ClampingScrollPhysics(),
+        itemBuilder: (BuildContext context, int index) {
+          return Clothesitem(product: category.productList[index]);
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     bool isWideScreen = MediaQuery.of(context).size.width > 700;
+
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
@@ -73,10 +167,9 @@ class MyHomePage extends StatelessWidget {
             Expanded(
               child: ListView.builder(
                 scrollDirection: isWideScreen ? Axis.horizontal : Axis.vertical,
-                itemCount: 3,
+                itemCount: mokdata.length,
                 itemBuilder: (context, index) {
-                  var setCategory = ['女裝', '男裝', '配件'];
-                  return _clothesList(setCategory[index], context);
+                  return _clothesList(mokdata[index], context);
                 },
               ),
             ),
