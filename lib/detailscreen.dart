@@ -94,20 +94,7 @@ class DetailPage extends StatelessWidget {
                 color: Colors.grey,
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(top: 8),
-              child: SizedBox(
-                width: 25.0,
-                height: 25.0,
-                child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        foregroundColor: Colors.blue,
-                        backgroundColor: Colors.black54,
-                        shadowColor: Colors.red),
-                    onPressed: null,
-                    child: Text('S')),
-              ),
-            ),
+            IconButton(onPressed: null, icon: Icon(Icons.add_circle))
           ],
         ),
       );
@@ -127,7 +114,8 @@ class DetailPage extends StatelessWidget {
                 style: const TextStyle(fontSize: 14, color: Colors.black)),
             const Divider(color: Colors.black38),
             Flexible(child: colorView()),
-            Flexible(child: sizeView())
+            Flexible(child: sizeView()),
+            Flexible(child: countView()),
           ],
         ),
       );
@@ -150,20 +138,20 @@ class DetailPage extends StatelessWidget {
         ]),
         Text(product.description,
             style: const TextStyle(color: Colors.black38, fontSize: 10)),
-        SizedBox(
-          height: 800,
-          child: ListView.builder(
-              itemCount: product.images.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.only(top: 8.0),
-                  child: Image.network(
-                    product.images[index],
-                    height: 150,
-                  ),
-                );
-              }),
-        )
+        ListView.builder(
+            shrinkWrap: true,
+            itemCount: product.images.length,
+            itemBuilder: (context, index) {
+              return Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: Image.network(
+                  product.images[index],
+                  height: 300,
+                  width: 600,
+                  fit: BoxFit.cover,
+                ),
+              );
+            }),
       ]),
     );
   }
@@ -188,7 +176,7 @@ class DetailPage extends StatelessWidget {
                 height: 400,
               ),
               chooseView(),
-              detail()
+              detail(),
             ]),
           ]),
         ));
