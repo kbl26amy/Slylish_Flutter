@@ -8,9 +8,9 @@ class MyHomePage extends StatelessWidget {
   final mokdata = <StylishCategory>[
     StylishCategory('女裝', <Product>[
       Product(
-          111111,
+          '201807202140',
           '透肌砰砰防曬襯衫',
-          '描述',
+          'O.N.S is all about options, which is why we took our staple polo shirt and upgraded it with slubby linen jersey, making it even lighter for those who prefer their summer style extra-breezy.',
           '文字',
           '洗滌',
           '中國',
@@ -18,13 +18,17 @@ class MyHomePage extends StatelessWidget {
           '故事',
           [Colors.red, Colors.blue, Colors.yellow],
           ['S', 'M', 'L'],
-          ['assets/clothes.jpeg'],
+          [
+            'https://api.appworks-school.tw/assets/201807202140/0.jpg',
+            'https://api.appworks-school.tw/assets/201807202140/1.jpg',
+            'https://api.appworks-school.tw/assets/201807202140/0.jpg'
+          ],
           'assets/clothes.jpeg',
           '100')
     ]),
     StylishCategory('男裝', <Product>[
       Product(
-          111111,
+          '111111',
           '男裝防曬襯衫1',
           '描述',
           '文字',
@@ -34,11 +38,15 @@ class MyHomePage extends StatelessWidget {
           '故事',
           [Colors.red, Colors.blue, Colors.yellow],
           ['S', 'M', 'L'],
-          ['assets/clothes.jpeg'],
+          [
+            'https://api.appworks-school.tw/assets/201807202140/0.jpg',
+            'https://api.appworks-school.tw/assets/201807202140/1.jpg',
+            'https://api.appworks-school.tw/assets/201807202140/0.jpg'
+          ],
           'assets/clothes.jpeg',
           '100'),
       Product(
-          111111,
+          '111111',
           '男裝防曬襯衫2',
           '描述',
           '文字',
@@ -48,13 +56,17 @@ class MyHomePage extends StatelessWidget {
           '故事',
           [Colors.red, Colors.blue, Colors.yellow],
           ['S', 'M', 'L'],
-          ['assets/clothes.jpeg'],
+          [
+            'https://api.appworks-school.tw/assets/201807202140/0.jpg',
+            'https://api.appworks-school.tw/assets/201807202140/1.jpg',
+            'https://api.appworks-school.tw/assets/201807202140/0.jpg'
+          ],
           'assets/clothes.jpeg',
           '100')
     ]),
     StylishCategory('配件', <Product>[
       Product(
-          111111,
+          '111111',
           '配件防曬襯衫1',
           '描述',
           '文字',
@@ -64,11 +76,15 @@ class MyHomePage extends StatelessWidget {
           '故事',
           [Colors.red, Colors.blue, Colors.yellow],
           ['S', 'M', 'L'],
-          ['assets/clothes.jpeg'],
+          [
+            'https://api.appworks-school.tw/assets/201807202140/0.jpg',
+            'https://api.appworks-school.tw/assets/201807202140/1.jpg',
+            'https://api.appworks-school.tw/assets/201807202140/0.jpg'
+          ],
           'assets/clothes.jpeg',
           '100'),
       Product(
-          111111,
+          '111111',
           '配件防曬襯衫2',
           '描述',
           '文字',
@@ -78,11 +94,15 @@ class MyHomePage extends StatelessWidget {
           '故事',
           [Colors.red, Colors.blue, Colors.yellow],
           ['S', 'M', 'L'],
-          ['assets/clothes.jpeg'],
+          [
+            'https://api.appworks-school.tw/assets/201807202140/0.jpg',
+            'https://api.appworks-school.tw/assets/201807202140/1.jpg',
+            'https://api.appworks-school.tw/assets/201807202140/0.jpg'
+          ],
           'assets/clothes.jpeg',
           '100'),
       Product(
-          111111,
+          '111111',
           '配件防曬襯衫3',
           '描述',
           '文字',
@@ -92,7 +112,11 @@ class MyHomePage extends StatelessWidget {
           '故事',
           [Colors.red, Colors.blue, Colors.yellow],
           ['S', 'M', 'L'],
-          ['assets/clothes.jpeg'],
+          [
+            'https://api.appworks-school.tw/assets/201807202140/0.jpg',
+            'https://api.appworks-school.tw/assets/201807202140/1.jpg',
+            'https://api.appworks-school.tw/assets/201807202140/0.jpg'
+          ],
           'assets/clothes.jpeg',
           '100')
     ])

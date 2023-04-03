@@ -1,5 +1,5 @@
 class Product {
-  int id = 0;
+  String id = "";
   String title = "";
   String description = "";
   String texture = "";

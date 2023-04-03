@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'model/product.dart';
 
+// ignore: must_be_immutable
 class Clothesitem extends StatefulWidget {
   Clothesitem({super.key, required this.product});
   Product product;
