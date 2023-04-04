@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/detailscreen.dart';
 import 'model/product.dart';
 
 // ignore: must_be_immutable
@@ -53,7 +54,10 @@ class _Clothesitem extends State<Clothesitem> {
   Widget build(BuildContext context) {
     return GestureDetector(
         onTap: () {
-          Navigator.pushNamed(context, '/detailpage');
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => DetailPage(product: product)));
         },
         child: _clothesContainer(product));
   }
