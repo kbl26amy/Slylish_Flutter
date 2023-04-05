@@ -1,28 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'model/product.dart';
 
 // ignore: must_be_immutable
 class DetailPage extends StatelessWidget {
   DetailPage({super.key, required this.product});
   final Product product;
-  Widget sizeButton(String size) => TextButton(
-      style: TextButton.styleFrom(
-        backgroundColor: Colors.blueGrey,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(12)),
-        ),
-      ),
-      onPressed: null,
-      child: Text(
-        size,
-        style: const TextStyle(color: Colors.white),
-      ));
+
   Widget colorView() => Padding(
-        padding: const EdgeInsets.only(top: 5.0),
+        padding: EdgeInsets.only(top: 5.0),
         child: SizedBox(
           height: 30,
           child: Row(
-            children: const [
+            children: [
               Text(
                 '顏色',
                 style: TextStyle(fontSize: 12, color: Colors.black),
@@ -32,21 +22,25 @@ class DetailPage extends StatelessWidget {
                   color: Colors.grey,
                 ),
               ),
-              Padding(
-                padding: EdgeInsets.only(right: 8),
+              Expanded(
                 child: SizedBox(
-                  width: 20.0,
-                  height: 20.0,
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(color: Colors.red),
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: 20.0,
-                height: 20.0,
-                child: DecoratedBox(
-                  decoration: BoxDecoration(color: Colors.black),
+                  height: 30,
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: product.colors.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(right: 8),
+                          child: SizedBox(
+                            width: 25,
+                            height: 25,
+                            child: DecoratedBox(
+                              decoration:
+                                  BoxDecoration(color: product.colors[index]),
+                            ),
+                          ),
+                        );
+                      }),
                 ),
               ),
             ],
@@ -67,77 +61,108 @@ class DetailPage extends StatelessWidget {
                 color: Colors.grey,
               ),
             ),
-            sizeButton('S'),
-            sizeButton('M'),
-            sizeButton('L')
+            Expanded(
+              child: SizedBox(
+                  height: 25,
+                  child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: product.sizes.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        return SizedBox(
+                            // Change the button size
+                            width: 35,
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 8),
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  // ElevatedButton styles
+                                  padding:
+                                      EdgeInsets.all(8), // Some padding example
+                                  shape: RoundedRectangleBorder(
+                                    // Border
+                                    borderRadius: BorderRadius.circular(14),
+                                  ),
+                                  backgroundColor: Colors.blueGrey,
+                                ),
+                                onPressed: () {},
+                                child: Text(product.sizes[index]),
+                              ),
+                            ));
+                      })),
+            ),
           ]),
         ),
       );
 
-  Widget countView() => Padding(
+  Widget countView(double width) => Padding(
         padding: const EdgeInsets.only(top: 8.0),
         child: SizedBox(
           height: 30,
-          width: 600,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Text(
-                '數量',
-                style: TextStyle(fontSize: 12, color: Colors.black),
-              ),
-              const Flexible(
-                child: VerticalDivider(
-                  color: Colors.grey,
+          width: width,
+          child: Expanded(
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const Text(
+                  '數量',
+                  style: TextStyle(fontSize: 12, color: Colors.black),
                 ),
-              ),
-              Stack(children: const [
-                SizedBox(
-                  width: 60.0,
-                  height: 30,
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(color: Colors.grey),
+                const Flexible(
+                  child: VerticalDivider(
+                    color: Colors.grey,
                   ),
                 ),
-                Positioned.fill(
-                    child: Align(
-                  alignment: Alignment.center,
-                  child:
-                      IconButton(onPressed: null, icon: Icon(Icons.add_circle)),
-                )),
-              ]),
-              const Expanded(
-                child: TextField(
-                  textAlign: TextAlign.center,
-                  textAlignVertical: TextAlignVertical.center,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText: '1',
+                Expanded(
+                  child: SizedBox(
+                    height: 30,
+                    child: Material(
+                      color: Colors.black54,
+                      child: InkWell(
+                        splashColor: Colors.white,
+                        onTap: () {},
+                        child: Center(
+                            child: Icon(Icons.remove_circle,
+                                color: Colors.black, size: 18)),
+                      ),
+                    ),
                   ),
                 ),
-              ),
-              Stack(children: const [
-                SizedBox(
-                  width: 60.0,
-                  height: 30,
-                  child: DecoratedBox(
-                    decoration: BoxDecoration(color: Colors.grey),
+                Expanded(
+                  child: TextFormField(
+                    keyboardType: TextInputType.number,
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                      FilteringTextInputFormatter.deny(RegExp(r'^0+')),
+                      LengthLimitingTextInputFormatter(10)
+                    ],
+                    textAlign: TextAlign.center,
+                    decoration: const InputDecoration(border: InputBorder.none),
+                    initialValue: "1",
                   ),
                 ),
-                Positioned.fill(
-                    child: Align(
-                  alignment: Alignment.center,
-                  child:
-                      IconButton(onPressed: null, icon: Icon(Icons.add_circle)),
-                )),
-              ]),
-            ],
+                Expanded(
+                  child: SizedBox(
+                    height: 30,
+                    child: Material(
+                      color: Colors.black54,
+                      child: InkWell(
+                        splashColor: Colors.white,
+                        onTap: () {},
+                        child: Center(
+                            child: Icon(Icons.add_circle,
+                                color: Colors.black, size: 18)),
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       );
-  Widget chooseView() => SizedBox(
+  Widget chooseView(double width) => SizedBox(
         height: 350,
-        width: 600,
+        width: width,
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
@@ -151,19 +176,19 @@ class DetailPage extends StatelessWidget {
                   style: const TextStyle(fontSize: 14, color: Colors.black)),
               Text('''\nNT\$${product.price}''',
                   style: const TextStyle(fontSize: 16, color: Colors.black)),
-              const Divider(color: Colors.black38),
+              Flexible(child: const Divider(color: Colors.black38)),
               Flexible(child: colorView()),
               Flexible(child: sizeView()),
-              Flexible(child: countView()),
+              Expanded(child: countView(width)),
               Padding(
                 padding: const EdgeInsets.only(top: 8.0),
                 child: TextButton(
                   style: TextButton.styleFrom(
-                    fixedSize: const Size(600, 40),
+                    fixedSize: Size(width, 40),
                     backgroundColor: Colors.black,
                     // foreground
                   ),
-                  onPressed: null,
+                  onPressed: () {},
                   child: const Text(
                     '請選擇尺寸',
                     style: TextStyle(color: Colors.white),
@@ -190,8 +215,18 @@ class DetailPage extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(children: [
-          Row(children: const [
-            Text('細部說明', style: TextStyle(color: Colors.brown, fontSize: 12)),
+          Row(children: [
+            ShaderMask(
+              shaderCallback: (bounds) => const LinearGradient(
+                colors: [Colors.indigoAccent, Colors.cyan],
+              ).createShader(bounds),
+              child: const Text(
+                '細部說明',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+            ),
             Expanded(
               child: Divider(
                 color: Colors.black38,
@@ -219,8 +254,36 @@ class DetailPage extends StatelessWidget {
     );
   }
 
+  Widget detailpage(BuildContext context, bool isWideScreen) {
+    return isWideScreen
+        ? ListView(children: [
+            Column(children: [
+              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                Image.asset(
+                  product.mainImage,
+                  height: 350,
+                ),
+                chooseView(300),
+              ]),
+              detail(),
+            ]),
+          ])
+        : ListView(children: [
+            Column(children: [
+              Image.asset(
+                product.mainImage,
+                height: 350,
+              ),
+              chooseView(600),
+              detail(),
+            ]),
+          ]);
+  }
+
   @override
   Widget build(BuildContext context) {
+    bool isWideScreen = MediaQuery.of(context).size.width > 700;
+
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
@@ -232,18 +295,8 @@ class DetailPage extends StatelessWidget {
         ),
         body: Center(
           child: SizedBox(
-            width: 800,
-            child: ListView(children: [
-              Column(children: [
-                Image.asset(
-                  product.mainImage,
-                  height: 350,
-                ),
-                chooseView(),
-                detail(),
-              ]),
-            ]),
-          ),
+              width: MediaQuery.of(context).size.width,
+              child: detailpage(context, isWideScreen)),
         ));
   }
 }
