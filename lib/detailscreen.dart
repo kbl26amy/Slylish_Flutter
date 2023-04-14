@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'model/product.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'model/item_detail_cubit.dart';
 
 // ignore: must_be_immutable
 class DetailPage extends StatelessWidget {
@@ -94,7 +96,7 @@ class DetailPage extends StatelessWidget {
         ),
       );
 
-  Widget countView(double width) => Padding(
+  Widget countView(BuildContext context, double width) => Padding(
         padding: const EdgeInsets.only(top: 8.0),
         child: SizedBox(
           height: 30,
@@ -119,7 +121,8 @@ class DetailPage extends StatelessWidget {
                       color: Colors.black54,
                       child: InkWell(
                         splashColor: Colors.white,
-                        onTap: () {},
+                        onTap: () =>
+                            context.read<ItemDetailCubit>().decrement(),
                         child: const Center(
                             child: Icon(Icons.remove_circle,
                                 color: Colors.black, size: 18)),
@@ -127,8 +130,9 @@ class DetailPage extends StatelessWidget {
                     ),
                   ),
                 ),
-                Expanded(
-                  child: TextFormField(
+                Expanded(child: BlocBuilder<ItemDetailCubit, Order>(
+                    builder: (context, state) {
+                  return TextFormField(
                     keyboardType: TextInputType.number,
                     inputFormatters: <TextInputFormatter>[
                       FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
@@ -137,9 +141,10 @@ class DetailPage extends StatelessWidget {
                     ],
                     textAlign: TextAlign.center,
                     decoration: const InputDecoration(border: InputBorder.none),
-                    initialValue: "1",
-                  ),
-                ),
+                    controller: TextEditingController()
+                      ..text = state.count.toString(),
+                  );
+                })),
                 Expanded(
                   child: SizedBox(
                     height: 30,
@@ -147,7 +152,8 @@ class DetailPage extends StatelessWidget {
                       color: Colors.black54,
                       child: InkWell(
                         splashColor: Colors.white,
-                        onTap: () {},
+                        onTap: () =>
+                            context.read<ItemDetailCubit>().increment(),
                         child: const Center(
                             child: Icon(Icons.add_circle,
                                 color: Colors.black, size: 18)),
@@ -160,7 +166,7 @@ class DetailPage extends StatelessWidget {
           ),
         ),
       );
-  Widget chooseView(double width) => SizedBox(
+  Widget chooseView(BuildContext context, double width) => SizedBox(
         height: 350,
         width: width,
         child: Padding(
@@ -179,7 +185,7 @@ class DetailPage extends StatelessWidget {
               const Flexible(child: Divider(color: Colors.black38)),
               Flexible(child: colorView()),
               Flexible(child: sizeView()),
-              Expanded(child: countView(width)),
+              Expanded(child: countView(context, width)),
               Padding(
                 padding: const EdgeInsets.only(top: 8.0),
                 child: TextButton(
@@ -263,7 +269,7 @@ class DetailPage extends StatelessWidget {
                   product.mainImage,
                   height: 350,
                 ),
-                chooseView(300),
+                chooseView(context, 300),
               ]),
               detail(),
             ]),
@@ -274,7 +280,7 @@ class DetailPage extends StatelessWidget {
                 product.mainImage,
                 height: 350,
               ),
-              chooseView(600),
+              chooseView(context, 600),
               detail(),
             ]),
           ]);
@@ -284,19 +290,22 @@ class DetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     bool isWideScreen = MediaQuery.of(context).size.width > 700;
 
-    return Scaffold(
-        appBar: AppBar(
-          centerTitle: true,
-          title: Image.asset(
-            'assets/logo.png',
-            fit: BoxFit.contain,
-            height: 20,
+    return BlocProvider(
+      create: (context) => ItemDetailCubit(),
+      child: Scaffold(
+          appBar: AppBar(
+            centerTitle: true,
+            title: Image.asset(
+              'assets/logo.png',
+              fit: BoxFit.contain,
+              height: 20,
+            ),
           ),
-        ),
-        body: Center(
-          child: SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: detailpage(context, isWideScreen)),
-        ));
+          body: Center(
+            child: SizedBox(
+                width: MediaQuery.of(context).size.width,
+                child: detailpage(context, isWideScreen)),
+          )),
+    );
   }
 }
