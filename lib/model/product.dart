@@ -13,19 +13,36 @@ class Product {
   List images = [];
   int price = 0;
   Product(
-      this.id,
-      this.title,
-      this.description,
-      this.texture,
-      this.wash,
-      this.place,
-      this.note,
-      this.story,
-      this.colors,
-      this.sizes,
-      this.images,
-      this.mainImage,
-      this.price);
+      {required this.id,
+      required this.title,
+      required this.description,
+      required this.texture,
+      required this.wash,
+      required this.place,
+      required this.note,
+      required this.story,
+      required this.colors,
+      required this.sizes,
+      required this.images,
+      required this.mainImage,
+      required this.price});
+
+  factory Product.fromMap(Map<String, dynamic> map) {
+    return Product(
+        id: map["id"] as int,
+        title: map["title"] as String,
+        description: map["description"] as String,
+        texture: map["texture"] as String,
+        wash: map["wash"] as String,
+        place: map["place"] as String,
+        note: map["note"] as String,
+        story: map["story"] as String,
+        colors: [],
+        sizes: [],
+        images: [],
+        mainImage: map["main_image"] as String,
+        price: map["price"] as int);
+  }
 }
 
 class StylishCategory {

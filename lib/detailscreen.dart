@@ -290,22 +290,20 @@ class DetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     bool isWideScreen = MediaQuery.of(context).size.width > 700;
 
-    return BlocProvider(
-      create: (context) => ItemDetailCubit(),
-      child: Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            title: Image.asset(
-              'assets/logo.png',
-              fit: BoxFit.contain,
-              height: 20,
-            ),
-          ),
-          body: Center(
-            child: SizedBox(
-                width: MediaQuery.of(context).size.width,
-                child: detailpage(context, isWideScreen)),
-          )),
+    return Scaffold(
+      appBar: AppBar(
+        centerTitle: true,
+        title: Image.asset(
+          'assets/logo.png',
+          fit: BoxFit.contain,
+          height: 20,
+        ),
+      ),
+      body: Center(
+        child: SizedBox(
+            width: MediaQuery.of(context).size.width,
+            child: detailpage(context, isWideScreen)),
+      ),
     );
   }
 }

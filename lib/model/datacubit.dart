@@ -13,9 +13,18 @@ class ProductCubit extends Cubit<DataState> {
       Response response = await dio
           .get('https://api.appworks-school.tw/api/1.0/products/women');
       if (response.statusCode == 200) {
-        print(response.data);
-      } else {}
-    } catch (e) {}
+        dynamic jsonString = jsonDecode(response.toString());
+        List<Product> products = List<Product>.from(
+            jsonString["data"].map((model) => Product.fromMap(model)));
+        emit(FemaleDataLoaded(femaleCatory: StylishCategory("女裝", products)));
+
+        print("The response is that \n${response.data}\n");
+      } else {
+        print("123456/");
+      }
+    } catch (e) {
+      print("123456/" + "$e");
+    }
   }
 }
 
@@ -26,23 +35,24 @@ class DataInitial extends DataState {}
 
 class DataLoading extends DataState {}
 
-class DataLoaded extends DataState {
-  StylishCategory femaleCategory = StylishCategory("女裝", <Product>[]);
-  StylishCategory maleCategory = StylishCategory("男裝", <Product>[]);
-  StylishCategory acceCategory = StylishCategory("配件", <Product>[]);
-
-  void updateFemaleList(List<Product> list) {
-    femaleCategory.productList.clear();
-    femaleCategory.productList.addAll(list);
-  }
-
-  void updateMaleList(List<Product> list) {
-    maleCategory.productList.clear();
-    maleCategory.productList.addAll(list);
-  }
-
-  void updateAcceList(List<Product> list) {
-    acceCategory.productList.clear();
-    acceCategory.productList.addAll(list);
-  }
+class FemaleDataLoaded extends DataState {
+  FemaleDataLoaded({required this.femaleCatory});
+  StylishCategory femaleCatory;
 }
+
+
+  // void updateFemaleList(List<Product> list) {
+  //   femaleCategory.productList.clear();
+  //   femaleCategory.productList.addAll(list);
+  // }
+
+  // void updateMaleList(List<Product> list) {
+  //   maleCategory.productList.clear();
+  //   maleCategory.productList.addAll(list);
+  // }
+
+  // void updateAcceList(List<Product> list) {
+  //   acceCategory.productList.clear();
+  //   acceCategory.productList.addAll(list);
+  // }
+
