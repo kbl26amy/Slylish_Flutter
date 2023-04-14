@@ -4,20 +4,20 @@ import 'model/product.dart';
 
 // ignore: must_be_immutable
 class DetailPage extends StatelessWidget {
-  DetailPage({super.key, required this.product});
+  const DetailPage({super.key, required this.product});
   final Product product;
 
   Widget colorView() => Padding(
-        padding: EdgeInsets.only(top: 5.0),
+        padding: const EdgeInsets.only(top: 5.0),
         child: SizedBox(
           height: 30,
           child: Row(
             children: [
-              Text(
+              const Text(
                 '顏色',
                 style: TextStyle(fontSize: 12, color: Colors.black),
               ),
-              Flexible(
+              const Flexible(
                 child: VerticalDivider(
                   color: Colors.grey,
                 ),
@@ -76,8 +76,8 @@ class DetailPage extends StatelessWidget {
                               child: ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                   // ElevatedButton styles
-                                  padding:
-                                      EdgeInsets.all(8), // Some padding example
+                                  padding: const EdgeInsets.all(
+                                      8), // Some padding example
                                   shape: RoundedRectangleBorder(
                                     // Border
                                     borderRadius: BorderRadius.circular(14),
@@ -120,7 +120,7 @@ class DetailPage extends StatelessWidget {
                       child: InkWell(
                         splashColor: Colors.white,
                         onTap: () {},
-                        child: Center(
+                        child: const Center(
                             child: Icon(Icons.remove_circle,
                                 color: Colors.black, size: 18)),
                       ),
@@ -148,7 +148,7 @@ class DetailPage extends StatelessWidget {
                       child: InkWell(
                         splashColor: Colors.white,
                         onTap: () {},
-                        child: Center(
+                        child: const Center(
                             child: Icon(Icons.add_circle,
                                 color: Colors.black, size: 18)),
                       ),
@@ -172,11 +172,11 @@ class DetailPage extends StatelessWidget {
                 product.title,
                 style: const TextStyle(fontSize: 18, color: Colors.black),
               ),
-              Text(product.id,
+              Text('${product.id}',
                   style: const TextStyle(fontSize: 14, color: Colors.black)),
               Text('''\nNT\$${product.price}''',
                   style: const TextStyle(fontSize: 16, color: Colors.black)),
-              Flexible(child: const Divider(color: Colors.black38)),
+              const Flexible(child: Divider(color: Colors.black38)),
               Flexible(child: colorView()),
               Flexible(child: sizeView()),
               Expanded(child: countView(width)),
@@ -227,7 +227,7 @@ class DetailPage extends StatelessWidget {
                 ),
               ),
             ),
-            Expanded(
+            const Expanded(
               child: Divider(
                 color: Colors.black38,
               ),

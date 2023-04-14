@@ -45,7 +45,7 @@ class _Clothesitem extends State<Clothesitem> {
                 Flexible(
                     child: Text(product.title,
                         style: const TextStyle(fontWeight: FontWeight.bold))),
-                Flexible(child: Text(product.price))
+                Flexible(child: Text('${product.price}'))
               ]),
         )
       ]));

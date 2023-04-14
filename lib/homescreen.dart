@@ -5,122 +5,7 @@ import 'clothes_item.dart';
 class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});
 
-  final mokdata = <StylishCategory>[
-    StylishCategory('女裝', <Product>[
-      Product(
-          '201807202140',
-          '透肌砰砰防曬襯衫',
-          'O.N.S is all about options, which is why we took our staple polo shirt and upgraded it with slubby linen jersey, making it even lighter for those who prefer their summer style extra-breezy.',
-          '薄',
-          '棉100%',
-          '中國',
-          '中國',
-          '無',
-          [Colors.red, Colors.blue, Colors.yellow],
-          ['S', 'M', 'L'],
-          [
-            'https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989__480.jpg',
-            'https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989__480.jpg',
-            'https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989__480.jpg',
-          ],
-          'assets/clothes.jpeg',
-          '100')
-    ]),
-    StylishCategory('男裝', <Product>[
-      Product(
-          '111111',
-          '男裝防曬襯衫1',
-          'O.N.S is all about options, which is why we took our staple polo shirt and upgraded it with slubby linen jersey, making it even lighter for those who prefer their summer style extra-breezy.',
-          '薄',
-          '棉100%',
-          '中國',
-          '中國',
-          '無',
-          [Colors.red, Colors.blue, Colors.yellow],
-          ['S', 'M', 'L'],
-          [
-            'https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989__480.jpg',
-            'https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989__480.jpg',
-            'https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989__480.jpg',
-          ],
-          'assets/clothes.jpeg',
-          '100'),
-      Product(
-          '111111',
-          '男裝防曬襯衫2',
-          'O.N.S is all about options, which is why we took our staple polo shirt and upgraded it with slubby linen jersey, making it even lighter for those who prefer their summer style extra-breezy.',
-          '薄',
-          '棉100%',
-          '中國',
-          '中國',
-          '無',
-          [Colors.red, Colors.blue, Colors.yellow],
-          ['S', 'M', 'L'],
-          [
-            'https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989__480.jpg',
-            'https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989__480.jpg',
-            'https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989__480.jpg',
-          ],
-          'assets/clothes.jpeg',
-          '100')
-    ]),
-    StylishCategory('配件', <Product>[
-      Product(
-          '111111',
-          '配件防曬襯衫1',
-          'O.N.S is all about options, which is why we took our staple polo shirt and upgraded it with slubby linen jersey, making it even lighter for those who prefer their summer style extra-breezy.',
-          '薄',
-          '棉100%',
-          '中國',
-          '中國',
-          '無',
-          [Colors.red, Colors.blue, Colors.yellow],
-          ['S', 'M', 'L'],
-          [
-            'https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989__480.jpg',
-            'https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989__480.jpg',
-            'https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989__480.jpg',
-          ],
-          'assets/clothes.jpeg',
-          '100'),
-      Product(
-          '111111',
-          '配件防曬襯衫2',
-          'O.N.S is all about options, which is why we took our staple polo shirt and upgraded it with slubby linen jersey, making it even lighter for those who prefer their summer style extra-breezy.',
-          '薄',
-          '棉100%',
-          '中國',
-          '中國',
-          '無',
-          [Colors.red, Colors.blue, Colors.yellow],
-          ['S', 'M', 'L'],
-          [
-            'https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989__480.jpg',
-            'https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989__480.jpg',
-            'https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989__480.jpg',
-          ],
-          'assets/clothes.jpeg',
-          '100'),
-      Product(
-          '111111',
-          '配件防曬襯衫3',
-          'O.N.S is all about options, which is why we took our staple polo shirt and upgraded it with slubby linen jersey, making it even lighter for those who prefer their summer style extra-breezy.',
-          '薄',
-          '棉100%',
-          '中國',
-          '中國',
-          '無',
-          [Colors.red, Colors.blue, Colors.yellow],
-          ['S', 'M', 'L'],
-          [
-            'https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989__480.jpg',
-            'https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989__480.jpg',
-            'https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989__480.jpg',
-          ],
-          'assets/clothes.jpeg',
-          '100')
-    ])
-  ];
+  final HomePageViewEntity mockData = HomePageViewEntity();
 
   //第一排圓角圖片
   Widget _topBanner(String assets) => Container(
@@ -168,6 +53,123 @@ class MyHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     bool isWideScreen = MediaQuery.of(context).size.width > 700;
 
+    mockData.updateFemaleList(<Product>[
+      Product(
+          201807202140,
+          '透肌砰砰防曬襯衫',
+          'O.N.S is all about options, which is why we took our staple polo shirt and upgraded it with slubby linen jersey, making it even lighter for those who prefer their summer style extra-breezy.',
+          '薄',
+          '棉100%',
+          '中國',
+          '中國',
+          '無',
+          [Colors.red, Colors.blue, Colors.yellow],
+          ['S', 'M', 'L'],
+          [
+            'https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989__480.jpg',
+            'https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989__480.jpg',
+            'https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989__480.jpg',
+          ],
+          'assets/clothes.jpeg',
+          100)
+    ]);
+
+    mockData.updateMaleList(<Product>[
+      Product(
+          111111,
+          '男裝防曬襯衫1',
+          'O.N.S is all about options, which is why we took our staple polo shirt and upgraded it with slubby linen jersey, making it even lighter for those who prefer their summer style extra-breezy.',
+          '薄',
+          '棉100%',
+          '中國',
+          '中國',
+          '無',
+          [Colors.red, Colors.blue, Colors.yellow],
+          ['S', 'M', 'L'],
+          [
+            'https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989__480.jpg',
+            'https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989__480.jpg',
+            'https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989__480.jpg',
+          ],
+          'assets/clothes.jpeg',
+          100),
+      Product(
+          111111,
+          '男裝防曬襯衫2',
+          'O.N.S is all about options, which is why we took our staple polo shirt and upgraded it with slubby linen jersey, making it even lighter for those who prefer their summer style extra-breezy.',
+          '薄',
+          '棉100%',
+          '中國',
+          '中國',
+          '無',
+          [Colors.red, Colors.blue, Colors.yellow],
+          ['S', 'M', 'L'],
+          [
+            'https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989__480.jpg',
+            'https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989__480.jpg',
+            'https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989__480.jpg',
+          ],
+          'assets/clothes.jpeg',
+          100)
+    ]);
+
+    mockData.updateAcceList(<Product>[
+      Product(
+          111111,
+          '配件防曬襯衫1',
+          'O.N.S is all about options, which is why we took our staple polo shirt and upgraded it with slubby linen jersey, making it even lighter for those who prefer their summer style extra-breezy.',
+          '薄',
+          '棉100%',
+          '中國',
+          '中國',
+          '無',
+          [Colors.red, Colors.blue, Colors.yellow],
+          ['S', 'M', 'L'],
+          [
+            'https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989__480.jpg',
+            'https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989__480.jpg',
+            'https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989__480.jpg',
+          ],
+          'assets/clothes.jpeg',
+          100),
+      Product(
+          111111,
+          '配件防曬襯衫2',
+          'O.N.S is all about options, which is why we took our staple polo shirt and upgraded it with slubby linen jersey, making it even lighter for those who prefer their summer style extra-breezy.',
+          '薄',
+          '棉100%',
+          '中國',
+          '中國',
+          '無',
+          [Colors.red, Colors.blue, Colors.yellow],
+          ['S', 'M', 'L'],
+          [
+            'https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989__480.jpg',
+            'https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989__480.jpg',
+            'https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989__480.jpg',
+          ],
+          'assets/clothes.jpeg',
+          100),
+      Product(
+          111111,
+          '配件防曬襯衫3',
+          'O.N.S is all about options, which is why we took our staple polo shirt and upgraded it with slubby linen jersey, making it even lighter for those who prefer their summer style extra-breezy.',
+          '薄',
+          '棉100%',
+          '中國',
+          '中國',
+          '無',
+          [Colors.red, Colors.blue, Colors.yellow],
+          ['S', 'M', 'L'],
+          [
+            'https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989__480.jpg',
+            'https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989__480.jpg',
+            'https://cdn.pixabay.com/photo/2013/07/18/20/26/sea-164989__480.jpg',
+          ],
+          'assets/clothes.jpeg',
+          100)
+    ]);
+
     return Scaffold(
         appBar: AppBar(
           centerTitle: true,
@@ -191,9 +193,18 @@ class MyHomePage extends StatelessWidget {
             Expanded(
               child: ListView.builder(
                 scrollDirection: isWideScreen ? Axis.horizontal : Axis.vertical,
-                itemCount: mokdata.length,
+                itemCount: 3,
                 itemBuilder: (context, index) {
-                  return _clothesList(mokdata[index], context);
+                  switch (index) {
+                    case 0:
+                      return _clothesList(mockData.femaleCategory, context);
+                    case 1:
+                      return _clothesList(mockData.maleCategory, context);
+                    case 2:
+                      return _clothesList(mockData.acceCategory, context);
+                    default:
+                      throw Exception("Undefine category");
+                  }
                 },
               ),
             ),

@@ -1,0 +1,18 @@
+import 'package:bloc/bloc.dart';
+
+class ItemDetailCubit extends Cubit<Order> {
+
+  ItemDetailCubit() : super(Order());
+
+  void increment() => emit(state.copyWith(count: state.count + 1));
+  void decrement() => emit(state.count == 0? state : state.copyWith(count: state.count - 1));
+}
+
+class Order {
+  final int count;
+
+  Order({this.count = 0});
+  Order copyWith({int? count}) => Order(
+    count: count ?? this.count,
+  );
+}
