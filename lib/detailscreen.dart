@@ -2,7 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'model/product.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'model/item_detail_cubit.dart';
+import 'model/detailcubit.dart';
+
+extension ColorExtension on String {
+  toColor() {
+    var hexString = this;
+    final buffer = StringBuffer();
+    if (hexString.length == 6 || hexString.length == 7) buffer.write('ff');
+    buffer.write(hexString.replaceFirst('#', ''));
+    return Color(int.parse(buffer.toString(), radix: 16));
+  }
+}
 
 // ignore: must_be_immutable
 class DetailPage extends StatelessWidget {
@@ -37,8 +47,9 @@ class DetailPage extends StatelessWidget {
                             width: 25,
                             height: 25,
                             child: DecoratedBox(
-                              decoration:
-                                  BoxDecoration(color: product.colors[index]),
+                              decoration: BoxDecoration(color: Colors.blueGrey
+                                  // product.colors[index].code.toColor()
+                                  ),
                             ),
                           ),
                         );
@@ -205,7 +216,7 @@ class DetailPage extends StatelessWidget {
                 height: 100,
                 child: Expanded(
                   child: Text(
-                      '''實品顏色依單品照為主 \n${product.wash} \n厚薄：${product.texture} \n彈性：${product.story}\n素材產地/${product.place}\n加工產地/${product.note}''',
+                      '''${product.wash} \n${product.texture} \n${product.description}\n素材產地/${product.place}\n${product.note}''',
                       style:
                           const TextStyle(fontSize: 12, color: Colors.black)),
                 ),
@@ -239,7 +250,7 @@ class DetailPage extends StatelessWidget {
               ),
             )
           ]),
-          Text(product.description,
+          Text(product.story,
               style: const TextStyle(color: Colors.black38, fontSize: 10)),
           ListView.builder(
               shrinkWrap: true,
@@ -265,7 +276,7 @@ class DetailPage extends StatelessWidget {
         ? ListView(children: [
             Column(children: [
               Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-                Image.asset(
+                Image.network(
                   product.mainImage,
                   height: 350,
                 ),
@@ -276,7 +287,7 @@ class DetailPage extends StatelessWidget {
           ])
         : ListView(children: [
             Column(children: [
-              Image.asset(
+              Image.network(
                 product.mainImage,
                 height: 350,
               ),

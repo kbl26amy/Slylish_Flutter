@@ -33,7 +33,7 @@ class _Clothesitem extends State<Clothesitem> {
         ClipRRect(
           borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(8.0), bottomLeft: Radius.circular(8.0)),
-          child: Image.asset(product.mainImage),
+          child: Image.network(product.mainImage),
         ),
         Flexible(
           child: Column(

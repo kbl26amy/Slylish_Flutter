@@ -1,3 +1,4 @@
+
 import 'package:bloc/bloc.dart';
 
 /// {@template item_detail_cubit}

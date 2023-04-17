@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/model/datacubit.dart';
-import 'package:flutter_application_1/model/item_detail_cubit.dart';
+import 'model/homecubit.dart';
+import 'model/detailcubit.dart';
+import 'model/product_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'homescreen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  final IProductRepository productRepository = ProductRepository();
 
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
         providers: [
-          BlocProvider<ProductCubit>(
-            create: (BuildContext context) => ProductCubit(),
+          BlocProvider<HomeCubit>(
+            create: (_) => HomeCubit(productRepository),
           ),
           BlocProvider<ItemDetailCubit>(
             create: (_) => ItemDetailCubit(),

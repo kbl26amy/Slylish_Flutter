@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class Product {
   int id = 0;
   String title = "";
@@ -12,37 +14,57 @@ class Product {
   String mainImage = "";
   List images = [];
   int price = 0;
-  Product(
-      {required this.id,
-      required this.title,
-      required this.description,
-      required this.texture,
-      required this.wash,
-      required this.place,
-      required this.note,
-      required this.story,
-      required this.colors,
-      required this.sizes,
-      required this.images,
-      required this.mainImage,
-      required this.price});
+  List variants = [];
 
-  factory Product.fromMap(Map<String, dynamic> map) {
+  Product({
+    required this.id,
+    required this.title,
+    required this.description,
+    required this.texture,
+    required this.wash,
+    required this.place,
+    required this.note,
+    required this.story,
+    required this.colors,
+    required this.sizes,
+    required this.images,
+    required this.mainImage,
+    required this.price,
+    required this.variants,
+  });
+
+  factory Product.fromJson(Map<String, dynamic> json) {
     return Product(
-        id: map["id"] as int,
-        title: map["title"] as String,
-        description: map["description"] as String,
-        texture: map["texture"] as String,
-        wash: map["wash"] as String,
-        place: map["place"] as String,
-        note: map["note"] as String,
-        story: map["story"] as String,
-        colors: [],
-        sizes: [],
-        images: [],
-        mainImage: map["main_image"] as String,
-        price: map["price"] as int);
+        id: json["id"],
+        title: json["title"],
+        description: json["description"],
+        texture: json["texture"],
+        wash: json["wash"],
+        place: json["place"],
+        note: json["note"],
+        story: json["story"],
+        colors: json["colors"],
+        sizes: json["sizes"],
+        images: json['images'],
+        mainImage: json["main_image"],
+        variants: json["variants"],
+        price: json["price"]);
   }
+}
+
+class Variants {
+  String color = "";
+  String size = "";
+  String stock = "";
+}
+
+class ClothesColors {
+  String name = "";
+  String color = "";
+
+  // factory ClothesColors.fromDynamic(dynamic color) {
+  //   return ClothesColors
+  // }
 }
 
 class StylishCategory {
