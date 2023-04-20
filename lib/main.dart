@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'model/homecubit.dart';
 import 'model/detailcubit.dart';
 import 'model/product_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'homescreen.dart';
+import 'methodchannel.dart';
 
 void main() {
   runApp(MyApp());

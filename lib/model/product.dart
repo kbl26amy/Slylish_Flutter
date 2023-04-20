@@ -60,7 +60,7 @@ class Variants {
 
 class ClothesColors {
   String name = "";
-  String color = "";
+  String code = "";
 
   // factory ClothesColors.fromDynamic(dynamic color) {
   //   return ClothesColors

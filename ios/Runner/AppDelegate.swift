@@ -8,6 +8,21 @@ import Flutter
     didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
   ) -> Bool {
     GeneratedPluginRegistrant.register(with: self)
+      
+      let controller : FlutterViewController = window?.rootViewController as! FlutterViewController;
+          let crossChannel = FlutterMethodChannel.init(name: "samples.flutter.io/systemVersion",
+                                                       binaryMessenger: controller as! FlutterBinaryMessenger);
+          crossChannel.setMethodCallHandler({
+            (call: FlutterMethodCall, result: FlutterResult) -> Void in
+        
+          });
+      
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
+    
+    private func getSystemVersion(result: FlutterResult) {
+      let device = UIDevice.current;
+        print("systemVersion：",device.systemVersion);
+        result(device.systemVersion);
+    }
 }
