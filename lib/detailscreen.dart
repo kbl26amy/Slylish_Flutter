@@ -47,9 +47,8 @@ class DetailPage extends StatelessWidget {
                             width: 25,
                             height: 25,
                             child: DecoratedBox(
-                              decoration: BoxDecoration(color: Colors.blueGrey
-                                  // product.colors[index].code.toColor()
-                                  ),
+                              decoration: BoxDecoration(
+                                  color: product.colors[index].code.toColor()),
                             ),
                           ),
                         );
@@ -110,70 +109,66 @@ class DetailPage extends StatelessWidget {
   Widget countView(BuildContext context, double width) => Padding(
         padding: const EdgeInsets.only(top: 8.0),
         child: SizedBox(
-          height: 30,
+          height: 25,
           width: width,
-          child: Expanded(
-            child: Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const Text(
-                  '數量',
-                  style: TextStyle(fontSize: 12, color: Colors.black),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Text(
+                '數量',
+                style: TextStyle(fontSize: 12, color: Colors.black),
+              ),
+              const Flexible(
+                child: VerticalDivider(
+                  color: Colors.grey,
                 ),
-                const Flexible(
-                  child: VerticalDivider(
-                    color: Colors.grey,
-                  ),
-                ),
-                Expanded(
-                  child: SizedBox(
-                    height: 30,
-                    child: Material(
-                      color: Colors.black54,
-                      child: InkWell(
-                        splashColor: Colors.white,
-                        onTap: () =>
-                            context.read<ItemDetailCubit>().decrement(),
-                        child: const Center(
-                            child: Icon(Icons.remove_circle,
-                                color: Colors.black, size: 18)),
-                      ),
+              ),
+              Expanded(
+                child: SizedBox(
+                  height: 30,
+                  child: Material(
+                    color: Colors.black54,
+                    child: InkWell(
+                      splashColor: Colors.white,
+                      onTap: () => context.read<ItemDetailCubit>().decrement(),
+                      child: const Center(
+                          child: Icon(Icons.remove_circle,
+                              color: Colors.black, size: 18)),
                     ),
                   ),
                 ),
-                Expanded(child: BlocBuilder<ItemDetailCubit, Order>(
-                    builder: (context, state) {
-                  return TextFormField(
-                    keyboardType: TextInputType.number,
-                    inputFormatters: <TextInputFormatter>[
-                      FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                      FilteringTextInputFormatter.deny(RegExp(r'^0+')),
-                      LengthLimitingTextInputFormatter(10)
-                    ],
-                    textAlign: TextAlign.center,
-                    decoration: const InputDecoration(border: InputBorder.none),
-                    controller: TextEditingController()
-                      ..text = state.count.toString(),
-                  );
-                })),
-                Expanded(
-                  child: SizedBox(
-                    height: 30,
-                    child: Material(
-                      color: Colors.black54,
-                      child: InkWell(
-                        splashColor: Colors.white,
-                        onTap: () =>
-                            context.read<ItemDetailCubit>().increment(),
-                        child: const Center(
-                            child: Icon(Icons.add_circle,
-                                color: Colors.black, size: 18)),
-                      ),
+              ),
+              Expanded(child: BlocBuilder<ItemDetailCubit, Order>(
+                  builder: (context, state) {
+                return TextFormField(
+                  keyboardType: TextInputType.number,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                    FilteringTextInputFormatter.deny(RegExp(r'^0+')),
+                    LengthLimitingTextInputFormatter(10)
+                  ],
+                  textAlign: TextAlign.center,
+                  decoration: const InputDecoration(border: InputBorder.none),
+                  controller: TextEditingController()
+                    ..text = state.count.toString(),
+                );
+              })),
+              Expanded(
+                child: SizedBox(
+                  height: 30,
+                  child: Material(
+                    color: Colors.black54,
+                    child: InkWell(
+                      splashColor: Colors.white,
+                      onTap: () => context.read<ItemDetailCubit>().increment(),
+                      child: const Center(
+                          child: Icon(Icons.add_circle,
+                              color: Colors.black, size: 18)),
                     ),
                   ),
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       );
@@ -196,7 +191,7 @@ class DetailPage extends StatelessWidget {
               const Flexible(child: Divider(color: Colors.black38)),
               Flexible(child: colorView()),
               Flexible(child: sizeView()),
-              Expanded(child: countView(context, width)),
+              countView(context, width),
               Padding(
                 padding: const EdgeInsets.only(top: 8.0),
                 child: TextButton(

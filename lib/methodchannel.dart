@@ -11,6 +11,7 @@ class Crosschannel extends StatefulWidget {
 }
 
 class CrosschannelState extends State<Crosschannel> {
+  
   static const platform = MethodChannel('samples.flutter.io/systemVersion');
   // Get battery level.
   String _systemVersion = 'Unknown system version.';
@@ -30,23 +31,11 @@ class CrosschannelState extends State<Crosschannel> {
 
   @override
   Widget build(BuildContext context) {
+    _getSystemVersion();
+    
     return Center(
       child: Column(
         children: <Widget>[
-          TextButton(
-            style: TextButton.styleFrom(
-              fixedSize: Size(100, 40),
-              backgroundColor: Colors.black,
-              // foreground
-            ),
-            onPressed: () {
-              _getSystemVersion();
-            },
-            child: const Text(
-              'show current systemVersion',
-              style: TextStyle(color: Colors.white),
-            ),
-          ),
           Text(_systemVersion),
         ],
       ),

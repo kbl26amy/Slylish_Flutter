@@ -14,15 +14,11 @@ import Flutter
                                                        binaryMessenger: controller as! FlutterBinaryMessenger);
           crossChannel.setMethodCallHandler({
             (call: FlutterMethodCall, result: FlutterResult) -> Void in
-        
+              let device = UIDevice.current;
+                print("systemVersion：",device.systemVersion);
+                result(device.systemVersion);
           });
       
     return super.application(application, didFinishLaunchingWithOptions: launchOptions)
   }
-    
-    private func getSystemVersion(result: FlutterResult) {
-      let device = UIDevice.current;
-        print("systemVersion：",device.systemVersion);
-        result(device.systemVersion);
-    }
 }

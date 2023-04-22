@@ -1,20 +1,18 @@
-import 'package:flutter/material.dart';
-
 class Product {
-  int id = 0;
-  String title = "";
-  String description = "";
-  String texture = "";
-  String wash = "";
-  String place = "";
-  String note = "";
-  String story = "";
-  List colors = [];
-  List sizes = [];
-  String mainImage = "";
-  List images = [];
-  int price = 0;
-  List variants = [];
+  final int id;
+  final String title;
+  final String description;
+  final String texture;
+  final String wash;
+  final String place;
+  final String note;
+  final String story;
+  final List<ProductColor> colors;
+  final List sizes;
+  final String mainImage;
+  final List images;
+  final int price;
+  final List<Variants> variants;
 
   Product({
     required this.id,
@@ -43,28 +41,45 @@ class Product {
         place: json["place"],
         note: json["note"],
         story: json["story"],
-        colors: json["colors"],
+        colors: (json["colors"] as List<dynamic>)
+            .map((color) => ProductColor.fromJson(color))
+            .toList(),
         sizes: json["sizes"],
         images: json['images'],
         mainImage: json["main_image"],
-        variants: json["variants"],
+        variants: (json["variants"] as List<dynamic>)
+            .map((color) => Variants.fromJson(color))
+            .toList(),
         price: json["price"]);
   }
 }
 
 class Variants {
-  String color = "";
-  String size = "";
-  String stock = "";
+  final String color;
+  final String size;
+  final int stock;
+
+  Variants({
+    required this.color,
+    required this.size,
+    required this.stock,
+  });
+
+  factory Variants.fromJson(Map<String, dynamic> json) {
+    return Variants(
+        color: json["color_code"], size: json["size"], stock: json["stock"]);
+  }
 }
 
-class ClothesColors {
-  String name = "";
-  String code = "";
+class ProductColor {
+  String name;
+  String code;
 
-  // factory ClothesColors.fromDynamic(dynamic color) {
-  //   return ClothesColors
-  // }
+  ProductColor({required this.name, required this.code});
+
+  factory ProductColor.fromJson(Map<String, dynamic> json) {
+    return ProductColor(name: json["name"], code: json["code"]);
+  }
 }
 
 class StylishCategory {

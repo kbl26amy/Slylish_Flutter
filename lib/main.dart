@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'model/homecubit.dart';
 import 'model/detailcubit.dart';
 import 'model/product_repository.dart';
