@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'model/product.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'cubit/detailcubit.dart';
+import 'package:flutter_application_1/cartscreen';
 
 extension ColorExtension on String {
   toColor() {
@@ -238,18 +239,38 @@ class DetailPage extends StatelessWidget {
               Flexible(child: sizeView()),
               countView(context, width),
               Padding(
-                padding: const EdgeInsets.only(top: 8.0),
-                child: TextButton(
-                  style: TextButton.styleFrom(
-                    fixedSize: Size(width, 40),
-                    backgroundColor: Colors.black,
-                    // foreground
-                  ),
-                  onPressed: () {},
-                  child: const Text(
-                    '請選擇尺寸',
-                    style: TextStyle(color: Colors.white),
-                  ),
+                padding: const EdgeInsets.all(8.0),
+                child: SizedBox(
+                  height: 25,
+                  width: width,
+                  child: BlocBuilder<DetailCubit, IDetailViewState>(
+                      builder: (context, state) {
+                    return ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          // Some padding example
+                          shape: RoundedRectangleBorder(
+                            // Border
+                            borderRadius: BorderRadius.circular(0),
+                          ),
+                          backgroundColor: Colors.black54),
+                      onPressed: () {
+                        context.read<DetailCubit>().isOrderValid()
+                            ? {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (BuildContext context) =>
+                                            CartPage(
+                                                product: product,
+                                                order: state.order)))
+                              }
+                            : {};
+                      },
+                      child: Text(context.read<DetailCubit>().isOrderValid()
+                          ? "前往購物車"
+                          : "請選擇正確 顏色/尺寸/數量"),
+                    );
+                  }),
                 ),
               ),
               SizedBox(
