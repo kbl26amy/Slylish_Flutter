@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'model/product.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'model/detailcubit.dart';
+import 'cubit/detailcubit.dart';
 
 extension ColorExtension on String {
   toColor() {
@@ -37,20 +37,44 @@ class DetailPage extends StatelessWidget {
               Expanded(
                 child: SizedBox(
                   height: 30,
+                  width: 30,
                   child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       itemCount: product.colors.length,
                       itemBuilder: (BuildContext context, int index) {
+                        List<String> colorList =
+                            product.colors.map((color) => color.code).toList();
+
                         return Padding(
                           padding: const EdgeInsets.only(right: 8),
-                          child: SizedBox(
-                            width: 25,
-                            height: 25,
-                            child: DecoratedBox(
-                              decoration: BoxDecoration(
-                                  color: product.colors[index].code.toColor()),
-                            ),
-                          ),
+                          child: BlocBuilder<DetailCubit, IDetailViewState>(
+                              builder: (context, state) {
+                            var isSelectedColor = false;
+                            if (colorList[index] == state.order.color) {
+                              isSelectedColor = true;
+                            }
+                            return ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  // ElevatedButton styles
+                                  padding: const EdgeInsets.all(8),
+                                  backgroundColor: colorList[index].toColor(),
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(0)),
+                                  ),
+                                  side: BorderSide(
+                                      width: 1,
+                                      color: isSelectedColor
+                                          ? Colors.black87
+                                          : Colors.transparent)),
+                              onPressed: () {
+                                context
+                                    .read<DetailCubit>()
+                                    .updateColor(colorList[index]);
+                              },
+                              child: null,
+                            );
+                          }),
                         );
                       }),
                 ),
@@ -81,25 +105,38 @@ class DetailPage extends StatelessWidget {
                       itemCount: product.sizes.length,
                       itemBuilder: (BuildContext context, int index) {
                         return SizedBox(
-                            // Change the button size
-                            width: 35,
-                            child: Padding(
-                              padding: const EdgeInsets.only(right: 8),
-                              child: ElevatedButton(
+                          // Change the button size
+                          width: 35,
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 8),
+                            child: BlocBuilder<DetailCubit, IDetailViewState>(
+                                builder: (context, state) {
+                              var isSelectedSize = false;
+                              if (product.sizes[index] == state.order.size) {
+                                isSelectedSize = true;
+                              }
+                              return ElevatedButton(
                                 style: ElevatedButton.styleFrom(
-                                  // ElevatedButton styles
-                                  padding: const EdgeInsets.all(
-                                      8), // Some padding example
-                                  shape: RoundedRectangleBorder(
-                                    // Border
-                                    borderRadius: BorderRadius.circular(14),
-                                  ),
-                                  backgroundColor: Colors.blueGrey,
-                                ),
-                                onPressed: () {},
+                                    // ElevatedButton styles
+                                    padding: const EdgeInsets.all(
+                                        8), // Some padding example
+                                    shape: RoundedRectangleBorder(
+                                      // Border
+                                      borderRadius: BorderRadius.circular(14),
+                                    ),
+                                    backgroundColor: isSelectedSize
+                                        ? Colors.black87
+                                        : Colors.grey),
+                                onPressed: () {
+                                  context
+                                      .read<DetailCubit>()
+                                      .updateSize(product.sizes[index]);
+                                },
                                 child: Text(product.sizes[index]),
-                              ),
-                            ));
+                              );
+                            }),
+                          ),
+                        );
                       })),
             ),
           ]),
@@ -130,7 +167,7 @@ class DetailPage extends StatelessWidget {
                     color: Colors.black54,
                     child: InkWell(
                       splashColor: Colors.white,
-                      onTap: () => context.read<ItemDetailCubit>().decrement(),
+                      onTap: () => context.read<DetailCubit>().decreaseAmount(),
                       child: const Center(
                           child: Icon(Icons.remove_circle,
                               color: Colors.black, size: 18)),
@@ -138,20 +175,28 @@ class DetailPage extends StatelessWidget {
                   ),
                 ),
               ),
-              Expanded(child: BlocBuilder<ItemDetailCubit, Order>(
+              Expanded(child: BlocBuilder<DetailCubit, IDetailViewState>(
                   builder: (context, state) {
+                String _currentText = "";
+                final controller = TextEditingController();
+                final amount = state.order.amount.toString();
+                controller.text = amount;
+                controller.selection =
+                    TextSelection.collapsed(offset: amount.length);
                 return TextFormField(
-                  keyboardType: TextInputType.number,
-                  inputFormatters: <TextInputFormatter>[
-                    FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
-                    FilteringTextInputFormatter.deny(RegExp(r'^0+')),
-                    LengthLimitingTextInputFormatter(10)
-                  ],
-                  textAlign: TextAlign.center,
-                  decoration: const InputDecoration(border: InputBorder.none),
-                  controller: TextEditingController()
-                    ..text = state.count.toString(),
-                );
+                    keyboardType: TextInputType.number,
+                    onChanged: (text) {
+                      _currentText = text;
+                      context.read<DetailCubit>().updateAmount(int.parse(text));
+                    },
+                    inputFormatters: <TextInputFormatter>[
+                      FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                      FilteringTextInputFormatter.deny(RegExp(r'^0+')),
+                      LengthLimitingTextInputFormatter(10)
+                    ],
+                    textAlign: TextAlign.center,
+                    decoration: const InputDecoration(border: InputBorder.none),
+                    controller: controller);
               })),
               Expanded(
                 child: SizedBox(
@@ -160,7 +205,7 @@ class DetailPage extends StatelessWidget {
                     color: Colors.black54,
                     child: InkWell(
                       splashColor: Colors.white,
-                      onTap: () => context.read<ItemDetailCubit>().increment(),
+                      onTap: () => context.read<DetailCubit>().increaseAmount(),
                       child: const Center(
                           child: Icon(Icons.add_circle,
                               color: Colors.black, size: 18)),

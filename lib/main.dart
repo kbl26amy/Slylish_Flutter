@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'model/homecubit.dart';
-import 'model/detailcubit.dart';
+import 'cubit/homecubit.dart';
+import 'cubit/detailcubit.dart';
 import 'model/product_repository.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'homescreen.dart';
@@ -22,8 +22,8 @@ class MyApp extends StatelessWidget {
           BlocProvider<HomeCubit>(
             create: (_) => HomeCubit(productRepository),
           ),
-          BlocProvider<ItemDetailCubit>(
-            create: (_) => ItemDetailCubit(),
+          BlocProvider<DetailCubit>(
+            create: (BuildContext context) => DetailCubit(),
           )
         ],
         child: MaterialApp(

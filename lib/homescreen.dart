@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'model/product.dart';
 import 'clothes_item.dart';
-import 'model/homecubit.dart';
+import 'cubit/homecubit.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});

@@ -1,6 +1,6 @@
 import 'package:bloc/bloc.dart';
-import 'product.dart';
-import 'product_repository.dart';
+import '../model/product.dart';
+import '../model/product_repository.dart';
 
 abstract class IHomeViewState {
   final HomeViewEntity homeViewEntity;

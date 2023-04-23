@@ -31,8 +31,6 @@ dependencies:
   bloc: ^8.1.0
   dio: ^5.1.1
   flutter_bloc: ^8.1.2
-  flutter_tappay: ^0.3.0
-
   flutter:
     sdk: flutter
 
