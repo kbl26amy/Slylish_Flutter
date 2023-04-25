@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="confirm">確認送出</string>
+    <string name="please_input_number">請先輸入正確格式的資訊</string>
+    <string name="error_message">Get prime failed</string>
+</resources>
