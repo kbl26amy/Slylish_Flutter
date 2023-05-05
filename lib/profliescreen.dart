@@ -104,10 +104,9 @@ class _ProfilePageState extends State<ProfilePage> {
                   Image.memory(frame.asUint8List(), height: 720, width: 1280),
             ));
     _hangUp();
-    // setState(() {
-    //   _photo = Image.memory(frame.asUint8List(), height: 720, width: 1280)
-    //       as ImageProvider;
-    // });
+    setState(() {
+      _photo = MemoryImage(frame.asUint8List(), scale: 1.0);
+    });
   }
 
   @override
@@ -128,7 +127,7 @@ class _ProfilePageState extends State<ProfilePage> {
           child: CircleAvatar(
               radius: 210,
               backgroundImage: _photo,
-              backgroundColor: Colors.green,
+              backgroundColor: Colors.white,
               child: RTCVideoView(_localRenderer, mirror: true)),
         ),
       ),
