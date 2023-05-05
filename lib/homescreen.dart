@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'model/product.dart';
 import 'clothes_item.dart';
 import 'cubit/homecubit.dart';
+import 'profliescreen.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});
@@ -65,6 +66,22 @@ class MyHomePage extends StatelessWidget {
             fit: BoxFit.contain,
             height: 20,
           ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 20.0),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => ProfilePage()));
+                },
+                child: Icon(
+                  Icons.account_box_rounded,
+                  size: 30.0,
+                  color: Colors.black,
+                ),
+              ),
+            )
+          ],
         ),
         body: BlocBuilder<HomeCubit, IHomeViewState>(builder: (context, state) {
           return Column(
