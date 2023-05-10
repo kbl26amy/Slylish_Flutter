@@ -4,6 +4,7 @@ import 'model/product.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'cubit/detailcubit.dart';
 import 'package:flutter_application_1/cartscreen';
+import 'arkit.dart';
 
 extension ColorExtension on String {
   toColor() {
@@ -370,6 +371,22 @@ class DetailPage extends StatelessWidget {
           fit: BoxFit.contain,
           height: 20,
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 20.0),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => ARKitPage()));
+              },
+              child: Icon(
+                Icons.accessibility,
+                size: 30.0,
+                color: Colors.black,
+              ),
+            ),
+          )
+        ],
       ),
       body: Center(
         child: SizedBox(

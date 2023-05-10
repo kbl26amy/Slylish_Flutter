@@ -1,16 +1,22 @@
 PODS:
+  - arkit_plugin (0.0.1):
+    - Flutter
   - Flutter (1.0.0)
   - flutter_webrtc (0.9.25):
     - Flutter
     - WebRTC-SDK (= 104.5112.16)
+  - image_picker_ios (0.0.1):
+    - Flutter
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
   - WebRTC-SDK (104.5112.16)
 
 DEPENDENCIES:
+  - arkit_plugin (from `.symlinks/plugins/arkit_plugin/ios`)
   - Flutter (from `Flutter`)
   - flutter_webrtc (from `.symlinks/plugins/flutter_webrtc/ios`)
+  - image_picker_ios (from `.symlinks/plugins/image_picker_ios/ios`)
   - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/ios`)
 
 SPEC REPOS:
@@ -18,16 +24,22 @@ SPEC REPOS:
     - WebRTC-SDK
 
 EXTERNAL SOURCES:
+  arkit_plugin:
+    :path: ".symlinks/plugins/arkit_plugin/ios"
   Flutter:
     :path: Flutter
   flutter_webrtc:
     :path: ".symlinks/plugins/flutter_webrtc/ios"
+  image_picker_ios:
+    :path: ".symlinks/plugins/image_picker_ios/ios"
   path_provider_foundation:
     :path: ".symlinks/plugins/path_provider_foundation/ios"
 
 SPEC CHECKSUMS:
+  arkit_plugin: 3e42571e8be84adabb8a178bd51c22fa981e16bd
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
   flutter_webrtc: ae7ab6f74d3c4f186594a74863f11433e7ab148a
+  image_picker_ios: 4a8aadfbb6dc30ad5141a2ce3832af9214a705b5
   path_provider_foundation: c68054786f1b4f3343858c1e1d0caaded73f0be9
   WebRTC-SDK: 566e58d2916cb79d770350169a449ea523f5db7c
 
