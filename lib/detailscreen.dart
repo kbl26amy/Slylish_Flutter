@@ -276,13 +276,10 @@ class DetailPage extends StatelessWidget {
               ),
               SizedBox(
                 height: 100,
-                child: Expanded(
-                  child: Text(
-                      '''${product.wash} \n${product.texture} \n${product.description}\n素材產地/${product.place}\n${product.note}''',
-                      style:
-                          const TextStyle(fontSize: 12, color: Colors.black)),
-                ),
-              )
+                child: Text(
+                    '''${product.wash} \n${product.texture} \n${product.description}\n素材產地/${product.place}\n${product.note}''',
+                    style: const TextStyle(fontSize: 12, color: Colors.black)),
+              ),
             ],
           ),
         ),
